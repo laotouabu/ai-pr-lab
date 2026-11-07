@@ -49,3 +49,17 @@ def clamp(value: float, low: float, high: float) -> float:
     if low > high:
         raise ValueError("low must be <= high")
     return max(low, min(value, high))
+
+
+def stdev(values: Iterable[float]) -> float:
+    """Return the sample standard deviation (Bessel corrected, ``n - 1``).
+
+    Raises:
+        ValueError: if fewer than two values are provided.
+    """
+    data = _as_floats(values)
+    if len(data) < 2:
+        raise ValueError("stdev() requires at least two values")
+    m = sum(data) / len(data)
+    variance = sum((x - m) ** 2 for x in data) / (len(data) - 1)
+    return variance**0.5

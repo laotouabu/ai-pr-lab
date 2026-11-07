@@ -1,6 +1,6 @@
 import pytest
 
-from calc.stats import clamp, mean, median
+from calc.stats import clamp, mean, median, stdev
 
 
 def test_mean_basic():
@@ -41,3 +41,18 @@ def test_clamp_below_and_above():
 def test_clamp_invalid_range():
     with pytest.raises(ValueError):
         clamp(1, 10, 0)
+
+
+def test_stdev_sample():
+    # statistics.stdev([1, 2, 3, 4]) == 1.2909944487358056
+    assert stdev([1, 2, 3, 4]) == pytest.approx(1.2909944487358056)
+
+
+def test_stdev_requires_two_values():
+    with pytest.raises(ValueError):
+        stdev([1])
+
+
+def test_stdev_rejects_empty():
+    with pytest.raises(ValueError):
+        stdev([])
