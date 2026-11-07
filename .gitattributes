@@ -1,0 +1,5 @@
+* text=auto
+
+# Git hooks must keep LF, otherwise sh fails with "bad interpreter"
+.githooks/* text eol=lf
+*.sh text eol=lf
