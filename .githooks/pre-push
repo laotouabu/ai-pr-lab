@@ -1,0 +1,12 @@
+#!/bin/sh
+# 推送前在本地跑一遍 CI 检查。安装方式：
+#   git config core.hooksPath .githooks
+set -e
+
+echo "==> ruff check"
+uv run ruff check .
+
+echo "==> pytest"
+uv run pytest
+
+echo "本地检查全部通过 ✅"

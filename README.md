@@ -42,6 +42,21 @@ uv run ruff check .
    在仓库 `Settings → Secrets and variables → Actions` 添加 `OPENCODE_API_KEY`（`oc_sk_...`），
    之后每次开 PR / 推新 commit 都会自动评论。没配 key 时该 job 直接跳过，不会报错。
 
+## Actions 被锁时（本地模式）
+
+GitHub 账号的计费锁会连 Actions 一起挡掉。工单处理期间用本地脚本代替：
+
+```powershell
+# 推送前自动跑 ruff + pytest
+git config core.hooksPath .githooks
+
+# 本地版 AI 评审
+$env:OPENCODE_API_KEY = "oc_sk_..."
+uv run python scripts/review_local.py
+```
+
+细节见 `docs/练习手册.md` 第 10 节。
+
 ## 建议的练习顺序
 
 1. 第一次 PR：只改 README 一句话，熟悉 PR 和 CI
