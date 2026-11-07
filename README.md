@@ -22,17 +22,13 @@
 
 ## 本地跑起来
 
-需要 Python 3.9 或更高版本。
+需要 `uv`（<https://docs.astral.sh/uv/>），Python 版本由 uv 自动管理。
 
 ```powershell
-cd ai-pr-lab
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -U pip
-pip install -e ".[dev]"
-
-pytest
-ruff check .
+cd E:\code\project\study\ai-pr-lab
+uv sync
+uv run pytest
+uv run ruff check .
 ```
 
 两条命令都绿，就可以开始按 [`docs/练习手册.md`](docs/练习手册.md) 走了。
